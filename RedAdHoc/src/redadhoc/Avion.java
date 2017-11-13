@@ -5,6 +5,13 @@
  */
 package redadhoc;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.util.Scanner;
+
 /**
  *
  * @author gaona
@@ -76,6 +83,57 @@ public class Avion extends javax.swing.JFrame {
                 new Avion().setVisible(true);
             }
         });
+        
+        comunicacion();
+    }
+    
+    public static void comunicacion(){
+        //Mensaje a pasar
+        String torre = "192.168.137.1";
+        String txt;
+        
+        System.out.println("Soy un avion");
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Introduce un mensaje");
+        txt = sc.nextLine();
+        
+        try {
+            DatagramSocket socketUDP = new DatagramSocket();
+            byte[] mensaje = txt.getBytes();
+            InetAddress hostServidor = InetAddress.getByName(torre);
+            int puertoServidor = 6789;
+            
+            InetAddress address = InetAddress.getLocalHost();
+            //System.out.println("IP Local :"+address.getHostAddress());
+            //System.out.println("IP Local :"+address.getLocalHost());
+            
+            // Construimos un datagrama para enviar el mensaje al servidor
+            DatagramPacket peticion =
+            new DatagramPacket(mensaje, txt.length(), hostServidor, puertoServidor);
+
+            // Enviamos el datagrama
+            socketUDP.send(peticion);
+
+            // Construimos el DatagramPacket que contendr� la respuesta
+            byte[] bufer = new byte[1000];
+            DatagramPacket respuesta =
+            new DatagramPacket(bufer, bufer.length);
+            socketUDP.receive(respuesta);
+
+            // Enviamos la respuesta del servidor a la salida estandar
+            System.out.println("Respuesta: " + new String(respuesta.getData()));
+
+            // Cerramos el socket
+            socketUDP.close();
+
+        } catch (SocketException e) {
+            System.out.println("Socket: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IO: " + e.getMessage());
+        }
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

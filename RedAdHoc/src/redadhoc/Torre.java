@@ -5,6 +5,11 @@
  */
 package redadhoc;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+
 /**
  *
  * @author gaona
@@ -76,6 +81,68 @@ public class Torre extends javax.swing.JFrame {
                 new Torre().setVisible(true);
             }
         });
+        
+        comunicacion();
+    }
+    
+    
+    public static void comunicacion(){
+        System.out.println("Soy el Servidor");
+
+        try {
+
+          DatagramSocket socketUDP = new DatagramSocket(6789);
+          byte[] bufer = new byte[1000];
+
+            // Construimos el DatagramPacket para recibir peticiones
+            DatagramPacket peticion =
+              new DatagramPacket(bufer, bufer.length);
+
+            // Leemos una petici�n del DatagramSocket
+            socketUDP.receive(peticion);
+
+            System.out.print("Datagrama recibido del host: " +
+                               peticion.getAddress());
+            System.out.println(" desde el puerto remoto: " +
+                               peticion.getPort());
+
+            System.out.println("Recibí del cliente: " + new String(peticion.getData()));
+
+            //Separamos la repuesta en un arreglo
+            String[] res = new String(peticion.getData()).split(" ");
+
+            //System.out.println(res[2]);
+            /*
+            a = Integer.parseInt(res[0]);
+            b = Integer.parseInt(res[1]);
+            c = Integer.parseInt(res[2].trim());
+            */
+
+            //Hacemos la chicharronera
+            //System.out.println(Math.sqrt(Math.pow(b, 2) - 4*a*c));
+            /*
+            x1 = (-b + Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2*a);
+            x2 = (-b - Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2*a);
+            */
+            //System.out.println("Error Aquí");
+
+            String resultado = "Enterado";
+            byte[] mensaje = resultado.getBytes();
+
+            // Construimos el DatagramPacket para enviar la respuesta
+            DatagramPacket respuesta =
+              new DatagramPacket(mensaje, resultado.length(),
+                                 peticion.getAddress(), peticion.getPort());
+
+            // Enviamos la respuesta, que es un eco
+            socketUDP.send(respuesta);
+
+        } catch (SocketException e) {
+          System.out.println("Socket: " + e.getMessage());
+        } catch (IOException e) {
+          System.out.println("IO: " + e.getMessage());
+        }
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
