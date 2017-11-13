@@ -143,6 +143,7 @@ public class Torre extends javax.swing.JFrame {
                 aviones.get(i).setX(Float.parseFloat(res[0]));
                 aviones.get(i).setY(Float.parseFloat(res[1]));
                 aviones.get(i).setZ(Float.parseFloat(res[2]));
+                aviones.get(i).doPhysics();
             }
             //Separamos la repuesta en un arreglo
 
@@ -160,7 +161,7 @@ public class Torre extends javax.swing.JFrame {
             x2 = (-b - Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2*a);
             */
             //System.out.println("Error Aquí");
-            aviones.get(i).doPhysics();
+            aviones.get(aviones.size() - 1).doPhysics();
             
             String resultado;
             
