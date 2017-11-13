@@ -133,6 +133,7 @@ public class Torre extends javax.swing.JFrame {
 
             System.out.println("Recibí del cliente: " + new String(peticion.getData()) );
 
+            String resultado;
             int  i = searchAvion( String.valueOf(peticion.getAddress()) );
             //Separamos la repuesta en un arreglo
             String[] res = new String(peticion.getData()).split(" ");
@@ -140,11 +141,21 @@ public class Torre extends javax.swing.JFrame {
             if( i < 0 ){
                 aviones.add(new Aviones( String.valueOf(peticion.getAddress()), Float.parseFloat(res[0]),Float.parseFloat(res[1]), Float.parseFloat(res[2])) );
                 aviones.get(aviones.size() - 1).doPhysics();
+                if(aviones.get(aviones.size() - 1).getY() < 300 ){
+                    resultado = "Llegaste";
+                }else{
+                    resultado = aviones.get(i).getX() + " " + aviones.get(i).getY() + aviones.get(i).getZ() ;
+                }
             }else{
                 aviones.get(i).setX(Float.parseFloat(res[0]));
                 aviones.get(i).setY(Float.parseFloat(res[1]));
                 aviones.get(i).setZ(Float.parseFloat(res[2]));
                 aviones.get(i).doPhysics();
+                if(aviones.get(i).getY() < 300 ){
+                    resultado = "Llegaste";
+                }else{
+                    resultado = aviones.get(i).getX() + " " + aviones.get(i).getY() + aviones.get(i).getZ() ;
+                }
             }
             //Separamos la repuesta en un arreglo
 
@@ -164,13 +175,9 @@ public class Torre extends javax.swing.JFrame {
             //System.out.println("Error Aquí");
             
             
-            String resultado;
             
-            if(aviones.get(i).getY() < 300 ){
-                resultado = "Llegaste";
-            }else{
-                resultado = aviones.get(i).getX() + " " + aviones.get(i).getY() + aviones.get(i).getZ() ;
-            }
+            
+
             byte[] mensaje = resultado.getBytes();
 
             // Construimos el DatagramPacket para enviar la respuesta
