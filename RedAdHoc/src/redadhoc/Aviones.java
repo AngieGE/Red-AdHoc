@@ -25,6 +25,14 @@ public class Aviones {
         this.y  = y;
         this.z  = z;
     }
+   
+    public Aviones(int x, int y, int z) {
+        //this.ip = ip;
+        this.x  = x;
+        this.y  = y;
+        this.z  = z;
+    }
+
 
     public String getIp() {
         return ip;
@@ -58,5 +66,8 @@ public class Aviones {
         this.z = z;
     }
     
+    public void doPhysics(){
+        y --;
+    }
     
 }

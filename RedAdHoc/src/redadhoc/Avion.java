@@ -18,6 +18,7 @@ import java.util.Scanner;
  */
 public class Avion extends javax.swing.JFrame {
 
+    Aviones yo = new Aviones(10,400,500);
     /**
      * Creates new form Avion
      */
@@ -83,10 +84,12 @@ public class Avion extends javax.swing.JFrame {
                 new Avion().setVisible(true);
             }
         });
-
+        
+        
         do{
-        comunicacion();
-        }while(comunicacion()==false);
+         if (comunicacion() )
+             break;
+        }while(true);
         
     }
     
@@ -99,8 +102,8 @@ public class Avion extends javax.swing.JFrame {
         System.out.println("Soy un avion");
         Scanner sc = new Scanner(System.in);
         
-        System.out.println("Introduce posicion x, y, z");
-        txt = sc.nextLine();
+        //System.out.println("Introduce posicion x, y, z");
+        txt = yo.getX() + " " + yo.getY() + " " + yo.getZ();
         
         try {
             DatagramSocket socketUDP = new DatagramSocket();
@@ -133,6 +136,11 @@ public class Avion extends javax.swing.JFrame {
             
             if(new String(respuesta.getData()) == "Llegaste"){
                 llego=true;
+            }else {
+                String[] str = new String(peticion.getData()).split(" ");
+                yo.setX( Integer.valueOf( str[0] ) );
+                yo.setY( Integer.valueOf( str[1] ) );
+                yo.setZ( Integer.valueOf( str[2] ) );
             }
 
         } catch (SocketException e) {

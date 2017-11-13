@@ -9,13 +9,17 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
+import java.util.ArrayList;
 
 /**
  *
  * @author gaona
  */
 public class Torre extends javax.swing.JFrame {
+    
+    ArrayList<Aviones> aviones = new ArrayList<Aviones>();
     static int x = 0;
+    
     /**
      * Creates new form Torre
      */
@@ -70,7 +74,7 @@ public class Torre extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -101,13 +105,14 @@ public class Torre extends javax.swing.JFrame {
             }
         });
         
+        
         while (true){
             conexion();
         }
     }
     
     
-    public static void conexion(){
+    public void conexion(){
         
         
         System.out.println("Soy el Servidor");
@@ -118,19 +123,28 @@ public class Torre extends javax.swing.JFrame {
           byte[] bufer = new byte[1000];
 
             // Construimos el DatagramPacket para recibir peticiones
-            DatagramPacket peticion =
-              new DatagramPacket(bufer, bufer.length);
+            DatagramPacket peticion = new DatagramPacket(bufer, bufer.length);
 
             // Leemos una petici�n del DatagramSocket
             socketUDP.receive(peticion);
 
             System.out.print("Datagrama recibido del host: " + peticion.getAddress());
-            System.out.println(" desde el puerto remoto: " + peticion.getPort());
+            System.out.println(" desde el puerto remoto: " + peticion.getPort() );
 
             System.out.println("Recibí del cliente: " + new String(peticion.getData()) );
 
+            int  i = searchAvion( String.valueOf(peticion.getAddress()) );
             //Separamos la repuesta en un arreglo
             String[] res = new String(peticion.getData()).split(" ");
+            
+            if( i < 0 ){
+                aviones.add(new Aviones( String.valueOf(peticion.getAddress()), Integer.parseInt(res[0]),Integer.parseInt(res[1]), Integer.parseInt(res[2])) );
+            }else{
+                aviones.get(i).setX(Integer.getInteger(res[0]));
+                aviones.get(i).setY(Integer.getInteger(res[1]));
+                aviones.get(i).setZ(Integer.getInteger(res[2]));
+            }
+            //Separamos la repuesta en un arreglo
 
             //System.out.println(res[2]);
             /*
@@ -146,9 +160,15 @@ public class Torre extends javax.swing.JFrame {
             x2 = (-b - Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2*a);
             */
             //System.out.println("Error Aquí");
-
+            aviones.get(i).doPhysics();
             
-            String resultado = "Enterado";
+            String resultado;
+            
+            if(aviones.get(i).getY() < 300 ){
+                resultado = "Llegaste";
+            }else{
+                resultado = aviones.get(i).getX() + " " + aviones.get(i).getY() + aviones.get(i).getZ() ;
+            }
             byte[] mensaje = resultado.getBytes();
 
             // Construimos el DatagramPacket para enviar la respuesta
@@ -164,6 +184,14 @@ public class Torre extends javax.swing.JFrame {
           System.out.println("IO: " + e.getMessage());
         }
     
+    }
+    
+    public int searchAvion(String ip){
+        for(int i = 0;i < aviones.size(); i++ ){
+            if( ip.equals(aviones.get(i).getIp() ) )
+                return i; 
+        }
+        return -1;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
