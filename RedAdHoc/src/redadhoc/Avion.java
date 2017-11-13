@@ -104,6 +104,7 @@ public class Avion extends javax.swing.JFrame {
         
         //System.out.println("Introduce posicion x, y, z");
         txt = yo.getX() + " " + yo.getY() + " " + yo.getZ();
+        System.out.println("Lo que le envio: "+ txt);
         
         try {
             DatagramSocket socketUDP = new DatagramSocket();
@@ -134,10 +135,13 @@ public class Avion extends javax.swing.JFrame {
             // Cerramos el socket
             socketUDP.close();
             
-            if(new String(respuesta.getData()) == "Llegaste"){
+            if(peticion.equals("Llegaste") ){
                 llego=true;
+                
             }else {
+                System.out.println("Entre al else");
                 String[] str = new String(peticion.getData()).split(" ");
+                //System.out.println("respuesta" + peticion.getData());
                 yo.setX( Float.parseFloat( str[0] ) );
                 yo.setY( Float.parseFloat( str[1] ) );
                 yo.setZ( Float.parseFloat( str[2] ) );
