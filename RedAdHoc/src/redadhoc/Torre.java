@@ -144,7 +144,7 @@ public class Torre extends javax.swing.JFrame {
                 if(aviones.get(aviones.size() - 1).getY() < 300 ){
                     resultado = "Llegaste";
                 }else{
-                    resultado = aviones.get(aviones.size() - 1).getX() + " " + aviones.get(aviones.size() - 1).getY() + aviones.get(aviones.size() - 1).getZ() ;
+                    resultado = aviones.get(aviones.size() - 1).getX() + " " + aviones.get(aviones.size() - 1).getY() + " " + aviones.get(aviones.size() - 1).getZ() ;
                 }
             }else{
                 aviones.get(i).setX(Float.parseFloat(res[0]));

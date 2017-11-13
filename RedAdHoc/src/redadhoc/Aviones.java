@@ -67,7 +67,7 @@ public class Aviones {
     }
     
     public void doPhysics(){
-        y --;
+        y = y  - 5;
     }
     
 }
