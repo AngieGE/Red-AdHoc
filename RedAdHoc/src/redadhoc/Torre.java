@@ -144,7 +144,7 @@ public class Torre extends javax.swing.JFrame {
                 if(aviones.get(aviones.size() - 1).getY() < 300 ){
                     resultado = "Llegaste";
                 }else{
-                    resultado = aviones.get(i).getX() + " " + aviones.get(i).getY() + aviones.get(i).getZ() ;
+                    resultado = aviones.get(aviones.size() - 1).getX() + " " + aviones.get(aviones.size() - 1).getY() + aviones.get(aviones.size() - 1).getZ() ;
                 }
             }else{
                 aviones.get(i).setX(Float.parseFloat(res[0]));
@@ -157,26 +157,6 @@ public class Torre extends javax.swing.JFrame {
                     resultado = aviones.get(i).getX() + " " + aviones.get(i).getY() + aviones.get(i).getZ() ;
                 }
             }
-            //Separamos la repuesta en un arreglo
-
-            //System.out.println(res[2]);
-            /*
-            a = Integer.parseInt(res[0]);
-            b = Integer.parseInt(res[1]);
-            c = Integer.parseInt(res[2].trim());
-            */
-
-            //Hacemos la chicharronera
-            //System.out.println(Math.sqrt(Math.pow(b, 2) - 4*a*c));
-            /*
-            x1 = (-b + Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2*a);
-            x2 = (-b - Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2*a);
-            */
-            //System.out.println("Error Aquí");
-            
-            
-            
-            
 
             byte[] mensaje = resultado.getBytes();
 
