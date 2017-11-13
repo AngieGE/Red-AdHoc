@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class Torre extends javax.swing.JFrame {
     
-    ArrayList<Aviones> aviones = new ArrayList<Aviones>();
+    static ArrayList<Aviones> aviones = new ArrayList<Aviones>();
     static int x = 0;
     
     /**
@@ -74,7 +74,7 @@ public class Torre extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -112,7 +112,7 @@ public class Torre extends javax.swing.JFrame {
     }
     
     
-    public void conexion(){
+    public static void conexion(){
         
         
         System.out.println("Soy el Servidor");
@@ -186,7 +186,7 @@ public class Torre extends javax.swing.JFrame {
     
     }
     
-    public int searchAvion(String ip){
+    public static int searchAvion(String ip){
         for(int i = 0;i < aviones.size(); i++ ){
             if( ip.equals(aviones.get(i).getIp() ) )
                 return i; 
