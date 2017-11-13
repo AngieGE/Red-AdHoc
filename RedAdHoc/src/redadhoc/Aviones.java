@@ -19,14 +19,14 @@ public class Aviones {
     
     }
     
-    public Aviones(String ip, int x, int y, int z) {
+    public Aviones(String ip, float x, float y, float z) {
         this.ip = ip;
         this.x  = x;
         this.y  = y;
         this.z  = z;
     }
    
-    public Aviones(int x, int y, int z) {
+    public Aviones(float x, float y, float z) {
         //this.ip = ip;
         this.x  = x;
         this.y  = y;

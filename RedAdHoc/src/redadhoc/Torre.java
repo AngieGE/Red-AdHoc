@@ -140,9 +140,9 @@ public class Torre extends javax.swing.JFrame {
             if( i < 0 ){
                 aviones.add(new Aviones( String.valueOf(peticion.getAddress()), Integer.parseInt(res[0]),Integer.parseInt(res[1]), Integer.parseInt(res[2])) );
             }else{
-                aviones.get(i).setX(Integer.getInteger(res[0]));
-                aviones.get(i).setY(Integer.getInteger(res[1]));
-                aviones.get(i).setZ(Integer.getInteger(res[2]));
+                aviones.get(i).setX(Float.parseFloat(res[0]));
+                aviones.get(i).setY(Float.parseFloat(res[1]));
+                aviones.get(i).setZ(Float.parseFloat(res[2]));
             }
             //Separamos la repuesta en un arreglo
 

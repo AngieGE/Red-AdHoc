@@ -138,9 +138,9 @@ public class Avion extends javax.swing.JFrame {
                 llego=true;
             }else {
                 String[] str = new String(peticion.getData()).split(" ");
-                yo.setX( Integer.valueOf( str[0] ) );
-                yo.setY( Integer.valueOf( str[1] ) );
-                yo.setZ( Integer.valueOf( str[2] ) );
+                yo.setX( Float.parseFloat( str[0] ) );
+                yo.setY( Float.parseFloat( str[1] ) );
+                yo.setZ( Float.parseFloat( str[2] ) );
             }
 
         } catch (SocketException e) {
