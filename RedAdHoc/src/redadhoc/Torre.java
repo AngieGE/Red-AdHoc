@@ -15,7 +15,7 @@ import java.net.SocketException;
  * @author gaona
  */
 public class Torre extends javax.swing.JFrame {
-
+    static int x = 0;
     /**
      * Creates new form Torre
      */
@@ -33,20 +33,39 @@ public class Torre extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 623, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 387, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -82,11 +101,15 @@ public class Torre extends javax.swing.JFrame {
             }
         });
         
-        comunicacion();
+        while (true){
+            conexion();
+        }
     }
     
     
-    public static void comunicacion(){
+    public static void conexion(){
+        
+        
         System.out.println("Soy el Servidor");
 
         try {
@@ -101,12 +124,10 @@ public class Torre extends javax.swing.JFrame {
             // Leemos una petici�n del DatagramSocket
             socketUDP.receive(peticion);
 
-            System.out.print("Datagrama recibido del host: " +
-                               peticion.getAddress());
-            System.out.println(" desde el puerto remoto: " +
-                               peticion.getPort());
+            System.out.print("Datagrama recibido del host: " + peticion.getAddress());
+            System.out.println(" desde el puerto remoto: " + peticion.getPort());
 
-            System.out.println("Recibí del cliente: " + new String(peticion.getData()));
+            System.out.println("Recibí del cliente: " + new String(peticion.getData()) );
 
             //Separamos la repuesta en un arreglo
             String[] res = new String(peticion.getData()).split(" ");
@@ -126,17 +147,17 @@ public class Torre extends javax.swing.JFrame {
             */
             //System.out.println("Error Aquí");
 
+            
             String resultado = "Enterado";
             byte[] mensaje = resultado.getBytes();
 
             // Construimos el DatagramPacket para enviar la respuesta
-            DatagramPacket respuesta =
-              new DatagramPacket(mensaje, resultado.length(),
-                                 peticion.getAddress(), peticion.getPort());
+            DatagramPacket respuesta = new DatagramPacket(mensaje, resultado.length(), peticion.getAddress(), peticion.getPort());
 
             // Enviamos la respuesta, que es un eco
             socketUDP.send(respuesta);
-
+            
+            socketUDP.close();
         } catch (SocketException e) {
           System.out.println("Socket: " + e.getMessage());
         } catch (IOException e) {
