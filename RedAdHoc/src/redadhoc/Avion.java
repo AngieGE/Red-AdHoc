@@ -40,11 +40,11 @@ public class Avion extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 721, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 553, Short.MAX_VALUE)
         );
 
         pack();
@@ -53,7 +53,7 @@ public class Avion extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public  void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -83,11 +83,15 @@ public class Avion extends javax.swing.JFrame {
                 new Avion().setVisible(true);
             }
         });
-        
+
+        do{
         comunicacion();
+        }while(comunicacion()==false);
+        
     }
     
-    public static void comunicacion(){
+    public boolean comunicacion(){
+        boolean llego=false;
         //Mensaje a pasar
         String torre = "192.168.137.1";
         String txt;
@@ -95,7 +99,7 @@ public class Avion extends javax.swing.JFrame {
         System.out.println("Soy un avion");
         Scanner sc = new Scanner(System.in);
         
-        System.out.println("Introduce un mensaje");
+        System.out.println("Introduce posicion x, y, z");
         txt = sc.nextLine();
         
         try {
@@ -120,12 +124,16 @@ public class Avion extends javax.swing.JFrame {
             DatagramPacket respuesta =
             new DatagramPacket(bufer, bufer.length);
             socketUDP.receive(respuesta);
-
+            
             // Enviamos la respuesta del servidor a la salida estandar
             System.out.println("Respuesta: " + new String(respuesta.getData()));
 
             // Cerramos el socket
             socketUDP.close();
+            
+            if(new String(respuesta.getData()) == "Llegaste"){
+                llego=true;
+            }
 
         } catch (SocketException e) {
             System.out.println("Socket: " + e.getMessage());
@@ -133,7 +141,7 @@ public class Avion extends javax.swing.JFrame {
             System.out.println("IO: " + e.getMessage());
         }
         
-        
+        return llego;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
