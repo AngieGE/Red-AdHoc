@@ -139,6 +139,7 @@ public class Torre extends javax.swing.JFrame {
             
             if( i < 0 ){
                 aviones.add(new Aviones( String.valueOf(peticion.getAddress()), Float.parseFloat(res[0]),Float.parseFloat(res[1]), Float.parseFloat(res[2])) );
+                aviones.get(aviones.size() - 1).doPhysics();
             }else{
                 aviones.get(i).setX(Float.parseFloat(res[0]));
                 aviones.get(i).setY(Float.parseFloat(res[1]));
@@ -161,7 +162,7 @@ public class Torre extends javax.swing.JFrame {
             x2 = (-b - Math.sqrt(Math.pow(b, 2) - 4*a*c))/(2*a);
             */
             //System.out.println("Error Aquí");
-            aviones.get(aviones.size() - 1).doPhysics();
+            
             
             String resultado;
             
