@@ -132,6 +132,12 @@ public class Avion extends javax.swing.JFrame {
             // Enviamos la respuesta del servidor a la salida estandar
             System.out.println("Respuesta: " + new String(respuesta.getData()));
 
+           /* String[] str = new String(respuesta.getData()).split(" ");
+                //System.out.println("respuesta" + peticion.getData());
+                yo.setX( Float.parseFloat( str[0] ) );
+                yo.setY( Float.parseFloat( str[1] ) );
+                yo.setZ( Float.parseFloat( str[2] ) );*/
+            
             // Cerramos el socket
             socketUDP.close();
             
@@ -140,7 +146,7 @@ public class Avion extends javax.swing.JFrame {
                 
             }else {
                 System.out.println("Entre al else");
-                String[] str = new String(peticion.getData()).split(" ");
+                String[] str = new String(respuesta.getData()).split(" ");
                 //System.out.println("respuesta" + peticion.getData());
                 yo.setX( Float.parseFloat( str[0] ) );
                 yo.setY( Float.parseFloat( str[1] ) );
