@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package redadhoc;
+package DavidTest;
 
-import javax.swing.JFrame;
 /**
  *
  * @author gaona
  */
-public class Pintar extends JFrame {
+public class ControlTorre {
     
 }
