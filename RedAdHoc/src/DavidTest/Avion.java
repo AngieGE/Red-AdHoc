@@ -183,15 +183,30 @@ public class Avion extends Thread implements Serializable{
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
+            
+            if(posx > 13000 && posx <18000 && posy > 13000 && posy < 18000)
+                detener();
         }
     }
     
     public void CalcularAceleracion(float posfx, float posfy, float velfx, float velfy){
         
+        float distx = posfx-posx;
+        float disty = posfx-posy;
         
         
-        aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( (posfx - posx) * 2 );
-        acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( (posfy - posy) * 2 );
+        if(distx == 0){
+            aclx = 0;
+            velx = 0;
+        }
+        else
+            aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( distx * 2 );
+        if(disty == 0){
+            acly = 0;
+            vely = 0;
+        }else
+            acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( disty * 2 );
+    
     }
     
     public void detener(){
