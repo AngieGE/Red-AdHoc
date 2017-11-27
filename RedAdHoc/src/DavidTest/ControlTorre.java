@@ -40,6 +40,9 @@ public class ControlTorre extends JPanel{
     static float[] velx = new float[4];
     static float[] vely = new float[4];
     
+    static float z;
+    static float velz;
+    
     public static void main(String args[]){
         int Port = 12345;
         //Pista 1
@@ -62,6 +65,9 @@ public class ControlTorre extends JPanel{
         y[3] = 20500;
         velx[3] = 0;
         vely[3] = -76;
+        
+        z = 300;
+        velz = 0;
         
         try {
             servSocket = new ServerSocket(Port);

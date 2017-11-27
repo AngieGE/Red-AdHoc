@@ -46,27 +46,27 @@ public class Avion extends Thread implements Serializable{
     boolean control;
     
     public Avion(){
-        int zona = (int) (Math.random() * 4 ) + 1;
+        zona = (int) (Math.random() * 4 ) + 1;
         switch(zona){
             case 1:
                 posx = (float) (Math.random() * 1000)   + 29000;
                 posy = (float) (Math.random() * 30000)  - 0;
-                posz = (float) (Math.random() * 1000)   + 5500;
+                posz = (float) (Math.random() * 1000)   + 2500;
                 break;
             case 2:
                 posx = (float) (Math.random() * 1000)   - 0;
                 posy = (float) (Math.random() * 30000)  - 0;
-                posz = (float) (Math.random() * 1000)   + 5500;
+                posz = (float) (Math.random() * 1000)   + 2500;
                 break;
             case 3:
                 posx = (float) (Math.random() * 30000)  - 0;
                 posy = (float) (Math.random() * 1000)   - 0;
-                posz = (float) (Math.random() * 1000)   + 5500;
+                posz = (float) (Math.random() * 1000)   + 2500;
                 break;
             case 4:
                 posx = (float) (Math.random() * 30000)  - 0;
                 posy = (float) (Math.random() * 1000)   + 29000;
-                posz = (float) (Math.random() * 1000)   + 5500; 
+                posz = (float) (Math.random() * 1000)   + 2500; 
                 break;
         }
        
@@ -193,7 +193,7 @@ public class Avion extends Thread implements Serializable{
             posy = posy + (vely * 1) + ((acly * 1)/2);
             posz = posz + (velz * 1) + ((aclz * 1)/2);
 
-            //se calcula la nueva velocida
+            //se calcula la nueva velocidad
             velx = velx + (aclx * 1);
             vely = vely + (acly * 1);
             velz = velz + (aclz * 1);
@@ -212,23 +212,20 @@ public class Avion extends Thread implements Serializable{
     }
     
     public void CalcularAceleracion(float posfx, float posfy, float velfx, float velfy){
-        
-        
-        
+
         if(zona == 1){
-            if(posx>=20500)
+            if(posx > 20500+1)
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(20500-posx) * 2 );
             else{
             System.out.println("Entre else zona1 x");
             aclx = 0;
             velx = 0;
-            posx = 20556;
+            posx = 20500;
             }
             
-            if(posy >= 15000)
+            if(posy > 15000+1)
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
                         else{
-                System.out.println("Entre else zona1 y");
                 acly = 0;
                 vely = 0;
                 posy = 15000;
@@ -236,18 +233,16 @@ public class Avion extends Thread implements Serializable{
         }
         
         if(zona == 2){
-            if(posx >= 20500)
+            if(posx > 20500+1)
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(20500-posx) * 2 );
             else{
-                System.out.println("Entre else zona2 x");
                 aclx = 0;
                 velx = 0;
-                posx = 20556;
+                posx = 20500;
             }
-            if(posy <= 15000)
+            if(posy < 15000 -1)
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posx) * 2 );
             else{
-                System.out.println("Entre else zona2 y");
                 acly = 0;
                 vely = 0;
                 posy = 15000;
@@ -255,18 +250,16 @@ public class Avion extends Thread implements Serializable{
         }
         
         if(zona == 3){
-            if(posx <= 9500)
+            if(posx < 9500-1)
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(9500-posx) * 2 );
             else{
-                System.out.println("Entre else zona3 z");
                 aclx = 0;
                 velx = 0;
-                posx = 5556;
+                posx = 9500;
             }
-            if(posy >= 15000)
+            if(posy > 15000+1)
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
             else{
-                System.out.println("Entre else zona31 y");
                 acly = 0;
                 vely = 0;
                 posy = 15000;
@@ -274,18 +267,16 @@ public class Avion extends Thread implements Serializable{
         }
         
         if(zona == 4){
-            if(posx <= 9500)
+            if(posx < 9500-1)
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(9500 -posx) * 2 );
             else{
-                System.out.println("Entre else zona 4 x");
                 aclx = 0;
                 velx = 0;
-                posx = 5556;
+                posx = 9500;
             }
-            if(posy <= 15000)
+            if(posy < 15000-1)
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
             else{
-                System.out.println("Entre else zona4 y");
                 acly = 0;
                 vely = 0;
                 posy = 15000;
@@ -293,79 +284,80 @@ public class Avion extends Thread implements Serializable{
         }
         
         if(zona == 5){
-            if(posx <= 15000)
+            if(posx < 15000-1)
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
             else{
-                System.out.println("Entre else zona5 x");
                 aclx = 0;
                 velx = 0;
-                //posx = 15000;
+                posx = 15000;
             }
-            if(posy <= 9500)
+            if(posy < 9500-1)
             acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(9500-posy) * 2 );
             else{
-                System.out.println("Entre else zona5 y");
                 acly = 0;
                 vely = 0;
-                posy = 5556;
+                posy = 9500;
             }
         }
         
         if(zona == 6){
-            if(posx >= 15000)
+            if(posx > 15000+1)
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
             else{
-                System.out.println("Entre else zona6 x");
                 aclx = 0;
                 velx = 0;
                 posx = 15000;
             }
-            if(posy <= 9500)
+            if(posy < 9500-1)
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(9500-posy) * 2 );
             else{
-                System.out.println("Entre else zona6 y");
                 acly = 0;
                 vely = 0;
-                posy = 5556;
+                posy = 9500;
             }
         }
 
         if(zona == 7){
-            if(posx <= 15000)
+            if(posx < 15000-1)
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
             else{
-                System.out.println("Entre else zona7 x");
                 aclx = 0;
                 velx = 0;
                 posx = 15000;
             }
-            if(posy >= 20500)
+            if(posy > 20500+1)
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(20500-posy) * 2 );
             else{
-                System.out.println("Entre else zona7 y");
                 acly = 0;
                 vely = 0;
-                posy = 20556;
+                posy = 20500;
             }
         }
         
         if(zona == 8 ){
-            if(posx >= 15000)
+            if(posx > 15000+1)
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
             else{
-                System.out.println("Entre else zona8 x ");
                 aclx = 0;
                 velx = 0;
                 posx = 15000;
             }
-            if(posy >=20500)
+            if(posy >20500+1)
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(20500-posy) * 2 );
             else{
-                System.out.println("Entre else zona8 y");
                 acly = 0;
                 vely = 0;
-                posy = 20556;
+                posy = 20500;
             }
+        }
+        
+        if(posz > 200-1)
+        aclz = (float) (Math.pow(0, 2) - Math.pow(velz, 2) )/ ( Math.abs(200-posz) * 2 );
+        else{
+            System.out.println("Entre else Z");
+            aclz = 0;
+            velz = 0;
+            posz = 0;
         }
         
         //aclx = aclx * -1;
