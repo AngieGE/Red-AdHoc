@@ -6,30 +6,25 @@
 package DavidTest;
 
 import java.awt.Graphics;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import java.awt.Dimension;
-import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;import java.net.UnknownHostException;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
+
 /**
  *
  * @author gaona
@@ -63,7 +58,24 @@ public class ControlAvion extends JPanel{
                         byte[] data = outputStream.toByteArray();
                         DatagramPacket sendPacket = new DatagramPacket(data,data.length,server,port);
                         socket.send(sendPacket);
-                        System.out.println("Message sent from client" );
+                        System.out.println("Message sent from client");
+                        
+                        byte[] incomingData = new byte[1024];
+                        DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
+                        System.out.println("Recibiendo");
+                        socket.receive(incomingPacket);
+                        byte[] nData = incomingPacket.getData();
+                        ByteArrayInputStream in = new ByteArrayInputStream(nData);
+                        ObjectInputStream is = new ObjectInputStream(in);
+                        Avion ninfo = (Avion) is.readObject();
+                        //System.out.println("Lectura completada");
+                        
+                        //System.out.println("Informacion recibida mi nueva aceleracion sera X: " +nAvion.aclx + " Y: " + nAvion.acly );
+                        miAvion.aclx = ninfo.aclx;
+                        miAvion.acly = ninfo.acly;
+                        
+                        
+                        
                         oos.close();
                         outputStream.close();
                         socket.close();
@@ -71,10 +83,12 @@ public class ControlAvion extends JPanel{
                         Logger.getLogger(ControlAvion.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ex) {
                         Logger.getLogger(ControlAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ControlAvion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(500);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ControlAvion.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -83,7 +97,8 @@ public class ControlAvion extends JPanel{
         };
         
         emisor.start();
-            
+        
+        
         // Creacion y visualizacion de la ventana
         JFrame v = new JFrame();
         ControlAvion panel = new ControlAvion();
@@ -116,11 +131,15 @@ public class ControlAvion extends JPanel{
     public void paint(Graphics g){
         super.paint(g);
         g.drawString( Float.toString(miAvion.posx), 20, 20);
-        g.drawRect(100, 100, 150, 150);
+        g.drawLine(190, 300, 410, 300);
+        g.drawLine(300, 190, 300, 410);
+        g.drawRect(miAvion.getIntPosx(), miAvion.getIntPosy(), 5, 5);
     }
     
+    @Override
     public Dimension getPreferredSize()
     {
+        super.getPreferredSize();
         return new Dimension(600, 600);
     }
     

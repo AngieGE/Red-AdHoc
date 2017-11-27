@@ -15,8 +15,8 @@ import java.util.logging.Logger;
  */
 public class Avion extends Thread implements Serializable{
     
-    String ip;
-    
+    String  ip;
+    int pista;
     /**
      * Posicion actual del avion
      */
@@ -44,81 +44,43 @@ public class Avion extends Thread implements Serializable{
     boolean control;
     
     public Avion(){
-        int zona = (int) (Math.random() * 8 ) + 1;
+        int zona = (int) (Math.random() * 4 ) + 1;
         switch(zona){
             case 1:
-                posx = (float) (Math.random() * 1000)   + 14500;
-                posy = (float) (Math.random() * 15000)  - 15000;
-                posz = (float) (Math.random() * 2000)   + 5000;
-                velx = (float) (Math.random() * 22) - 122;
-                vely = (float) (Math.random() * 22) + 100;
-                velz = 0;
+                posx = (float) (Math.random() * 1000)   + 29500;
+                posy = (float) (Math.random() * 30000)  - 0;
+                posz = (float) (Math.random() * 1000)   + 5500;
                 break;
             case 2:
-                posx = (float) (Math.random() * 1000)   + 14500;
-                posy = (float) (Math.random() * 15000)  - 15000;
-                posz = (float) (Math.random() * 2000)   + 5000;
-                velx = (float) (Math.random() * 22) - 122;
-                vely = (float) (Math.random() * 22) - 122;
-                velz = 0;
+                posx = (float) (Math.random() * 1000)   - 500;
+                posy = (float) (Math.random() * 30000)  - 0;
+                posz = (float) (Math.random() * 1000)   + 5500;
                 break;
             case 3:
-                posx = (float) (Math.random() * 1000)   - 15500;
-                posy = (float) (Math.random() * 15500)  - 15500;
-                posz = (float) (Math.random() * 2000)   + 5000;
-                velx = (float) (Math.random() * 22) + 100;
-                vely = (float) (Math.random() * 22) + 100;
-                velz = 0;
+                posx = (float) (Math.random() * 30000)  - 0;
+                posy = (float) (Math.random() * 1000)   - 500;
+                posz = (float) (Math.random() * 1000)   + 5500;
                 break;
             case 4:
-                posx = (float) (Math.random() * 1000)  - 15500;
-                posy = (float) (Math.random() * 15500)  - 0;
-                posz = (float) (Math.random() * 2000)   + 5000; 
-                velx = (float) (Math.random() * 22) + 100;
-                vely = (float) (Math.random() * 22) - 122;
-                velz = 0;
-                break;
-            case 5:
-                posx = (float) (Math.random() * 15500)  - 15500;
-                posy = (float) (Math.random() * 1000)   + 14500;
-                posz = (float) (Math.random() * 2000)   + 5000;
-                velx = (float) (Math.random() * 22) + 100;
-                vely = (float) (Math.random() * 22) - 122;
-                velz = 0;
-                break;
-            case 6:
-                posx = (float) (Math.random() * 15500)  - 0;
-                posy = (float) (Math.random() * 1000)   + 14500;
-                posz = (float) (Math.random() * 2000)   + 5000;
-                velx = (float) (Math.random() * 22) - 122;
-                vely = (float) (Math.random() * 22) - 122;
-                velz = 0;
-                break;
-            case 7:
-                posx = (float) (Math.random() * 15500)  - 15500;
-                posy = (float) (Math.random() * 1000)   - 15500;
-                posz = (float) (Math.random() * 2000)   + 5000;
-                velx = (float) (Math.random() * 22) + 100;
-                vely = (float) (Math.random() * 22) + 100;
-                velz = 0;
-                break;
-            case 8:
-                posx = (float) (Math.random() * 15500)  - 0;
-                posy = (float) (Math.random() * 1000)   + 14500;
-                posz = (float) (Math.random() * 2000)   + 5000;
-                velx = (float) (Math.random() * 22) - 122;
-                vely = (float) (Math.random() * 22) + 100;
-                velz = 0;
+                posx = (float) (Math.random() * 30000)  - 0;
+                posy = (float) (Math.random() * 1000)   + 29500;
+                posz = (float) (Math.random() * 1000)   + 5500; 
                 break;
         }
         
+        
+       float auxx = posx - 15000;
+       float auxy = posy - 15000;
+        
+        velx = (float) ( (Math.random() * 22) + 100 ) * (auxx/Math.abs(auxx) * -1);
+        vely = (float) ( (Math.random() * 22) + 100 ) * (auxy/Math.abs(auxy) * -1);
+        velz =  - 95;
         aclx = 0;
         acly = 0;
-        aclx = 0;
-        
-        ip = "Soy el avion numero 1";
-        
+       
+        pista = -1;
         control = true;
+        
     }
 
     public Avion(float posx, float posy, float posz, float velx, float vely, float velz) {
@@ -142,6 +104,10 @@ public class Avion extends Thread implements Serializable{
     public float getPosx() {
         return posx;
     }
+    
+    public int getIntPosx(){
+        return (int) (posx * 600)/30000; 
+    }
 
     public void setPosx(float posx) {
         this.posx = posx;
@@ -149,6 +115,10 @@ public class Avion extends Thread implements Serializable{
 
     public float getPosy() {
         return posy;
+    }
+    
+    public int getIntPosy(){
+        return (int) (posy * 600)/30000;
     }
 
     public void setPosy(float posy) {
@@ -206,16 +176,23 @@ public class Avion extends Thread implements Serializable{
             vely = vely + (acly * 1);
             velz = velz + (aclz * 1);
             
-            
+            if(posz < 300)
+                velz = 0;
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
         }
     }
     
-    
+    public void CalcularAceleracion(float posfx, float posfy, float velfx, float velfy){
+        
+        
+        
+        aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( (posfx - posx) * 2 );
+        acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( (posfy - posy) * 2 );
+    }
     
     public void detener(){
         control = false;
