@@ -43,6 +43,8 @@ public class Avion extends Thread implements Serializable{
     /**
      * Control de operacion
      */
+    boolean controlx;
+    boolean controly;
     boolean control;
     
     public Avion(){
@@ -102,6 +104,8 @@ public class Avion extends Thread implements Serializable{
        
         //pista = -1;
         control = true;
+        controlx = true;
+        controly = true;
         
     }
 
@@ -218,20 +222,22 @@ public class Avion extends Thread implements Serializable{
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(20500-posx) * 2 );
             }
             else{
-            System.out.println("Entre else zona1 x");
-            aclx = 0;
-            velx = 0;
-            posx = 20500;
+                System.out.println("Entre else zona1 x");
+                aclx = 0;
+                velx = 0;
+                posx = 20500;
+                controlx = false;
             }
             
             if(posy > 15000+1){
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
-                acly = acly * 2;
+                acly = acly * 4;
             }
             else{
                 acly = 0;
                 vely = 0;
                 posy = 15000;
+                controly = false;
             }
         }
         
@@ -242,15 +248,17 @@ public class Avion extends Thread implements Serializable{
                 aclx = 0;
                 velx = 0;
                 posx = 20500;
+                controlx = false;
             }
             if(posy < 15000 -1){
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posx) * 2 );
-                acly = acly * 2;
+                acly = acly * 4;
             }
             else{
                 acly = 0;
                 vely = 0;
                 posy = 15000;
+                controly = false;
             }
         }
         
@@ -261,15 +269,17 @@ public class Avion extends Thread implements Serializable{
                 aclx = 0;
                 velx = 0;
                 posx = 9500;
+                controlx = false;
             }
             if(posy > 15000+1){
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
-                acly = acly * 2;
+                acly = acly * 4;
             }
             else{
                 acly = 0;
                 vely = 0;
                 posy = 15000;
+                controly = false;
             }
         }
         
@@ -280,27 +290,30 @@ public class Avion extends Thread implements Serializable{
                 aclx = 0;
                 velx = 0;
                 posx = 9500;
+                controlx = false;
             }
             if(posy < 15000-1){
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
-                acly = acly * 2;
+                acly = acly * 4;
             }
             else{
                 acly = 0;
                 vely = 0;
                 posy = 15000;
+                controly = false;
             }
         }
         
         if(zona == 5){
             if(posx < 15000-1){
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
-                aclx = aclx * 2;
+                aclx = aclx * 4;
             }
             else{
                 aclx = 0;
                 velx = 0;
                 posx = 15000;
+                controlx = false;
             }
             if(posy < 9500-1)
             acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(9500-posy) * 2 );
@@ -308,18 +321,20 @@ public class Avion extends Thread implements Serializable{
                 acly = 0;
                 vely = 0;
                 posy = 9500;
+                controly = false;
             }
         }
         
         if(zona == 6){
             if(posx > 15000+1){
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
-                aclx = aclx * 2;
+                aclx = aclx * 4;
             }
             else{
                 aclx = 0;
                 velx = 0;
                 posx = 15000;
+                controlx = false;
             }
             if(posy < 9500-1)
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(9500-posy) * 2 );
@@ -327,18 +342,20 @@ public class Avion extends Thread implements Serializable{
                 acly = 0;
                 vely = 0;
                 posy = 9500;
+                controly = false;
             }
         }
 
         if(zona == 7){
             if(posx < 15000-1){
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
-                aclx = aclx * 2;
+                aclx = aclx * 4;
             }
             else{
                 aclx = 0;
                 velx = 0;
                 posx = 15000;
+                controlx = false;
             }
             if(posy > 20500+1)
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(20500-posy) * 2 );
@@ -346,18 +363,20 @@ public class Avion extends Thread implements Serializable{
                 acly = 0;
                 vely = 0;
                 posy = 20500;
+                controly = false;
             }
         }
         
         if(zona == 8 ){
             if(posx > 15000+1){
                 aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
-                aclx = aclx * 2;
+                aclx = aclx * 4;
             }
             else{
                 aclx = 0;
                 velx = 0;
                 posx = 15000;
+                controlx = false;
             }
             if(posy >20500+1)
                 acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(20500-posy) * 2 );
@@ -365,6 +384,7 @@ public class Avion extends Thread implements Serializable{
                 acly = 0;
                 vely = 0;
                 posy = 20500;
+                controly = false;
             }
         }
         
@@ -376,6 +396,11 @@ public class Avion extends Thread implements Serializable{
             velz = 0;
             posz = 300;
         }
+        
+        if(controlx == false && controly == false){
+            control = false;
+        }
+
         
         //aclx = aclx * -1;
         //acly = acly * -1;
