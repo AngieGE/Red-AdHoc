@@ -215,123 +215,162 @@ public class Avion extends Thread implements Serializable{
         
         
         
-        
-        
-        if(zona == 1 && posx >= 20500)
-            aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(20500-posx) * 2 );
-        else{
+        if(zona == 1){
+            if(posx>=20500)
+                aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(20500-posx) * 2 );
+            else{
+            System.out.println("Entre else zona1 x");
             aclx = 0;
             velx = 0;
             posx = 20556;
-        }
-        if(zona == 1 && posy >= 15000)
-            acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
-        else{
-            acly = 0;
-            vely = 0;
-            posy = 15000;
-        }
-        if(zona == 2 && posx >= 20500)
-            aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(20500-posx) * 2 );
-        else{
-            aclx = 0;
-            velx = 0;
-            posx = 20556;
-        }
-        if(zona == 2 && posy <= 15000)
-            acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posx) * 2 );
-        else{
-            acly = 0;
-            vely = 0;
-            posy = 15000;
-        }
-        if(zona == 3 && posx <= 9500)
-            aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(9500-posx) * 2 );
-        else{
-            aclx = 0;
-            velx = 0;
-            posx = 5556;
-        }
-        if(zona == 3 && posy >= 15000)
-            acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
-        else{
-            acly = 0;
-            vely = 0;
-            posy = 15000;
-        }
-        if(zona == 4 && posx <= 9500)
-            aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(9500 -posx) * 2 );
-        else{
-            aclx = 0;
-            velx = 0;
-            posx = 5556;
-        }
-        if(zona == 4 && posy <= 15000)
-            acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
-        else{
-            acly = 0;
-            vely = 0;
-            posy = 15000;
-        }
-        if(zona == 5 && posx <= 15000)
-            aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
-        else{
-            aclx = 0;
-            velx = 0;
-            posx = 15000;
-        }
-        if(zona == 5 && posy <= 9500)
-            acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(9500-posy) * 2 );
-        else{
-            acly = 0;
-            vely = 0;
-            posy = 5556;
-        }
-        if(zona == 6 && posx >= 15000)
-            aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
-        else{
-            aclx = 0;
-            velx = 0;
-            posx = 15000;
-        }
-        if(zona == 6 && posy <= 9500)
-            acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(9500-posy) * 2 );
-        else{
-            acly = 0;
-            vely = 0;
-            posy = 5556;
-        }
-        if(zona == 7 && posx <= 15000)
-            aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
-        else{
-            aclx = 0;
-            velx = 0;
-            posx = 15000;
-        }
-        if(zona == 7 && posy >= 20500)
-            acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(20500-posy) * 2 );
-        else{
-            acly = 0;
-            vely = 0;
-            posy = 20556;
-        }
-        if(zona == 8 && posx >= 15000)
-            aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
-        else{
-            aclx = 0;
-            velx = 0;
-            posx = 15000;
-        }
-        if(zona == 8 && posy >= 20500)
-            acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(20500-posy) * 2 );
-        else{
-            acly = 0;
-            vely = 0;
-            posy = 20556;
+            }
+            
+            if(posy >= 15000)
+                acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
+                        else{
+                System.out.println("Entre else zona1 y");
+                acly = 0;
+                vely = 0;
+                posy = 15000;
+            }
         }
         
-        aclx = aclx * -1;
-        acly = acly * -1;
+        if(zona == 2){
+            if(posx >= 20500)
+                aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(20500-posx) * 2 );
+            else{
+                System.out.println("Entre else zona2 x");
+                aclx = 0;
+                velx = 0;
+                posx = 20556;
+            }
+            if(posy <= 15000)
+                acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posx) * 2 );
+            else{
+                System.out.println("Entre else zona2 y");
+                acly = 0;
+                vely = 0;
+                posy = 15000;
+            }
+        }
+        
+        if(zona == 3){
+            if(posx <= 9500)
+                aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(9500-posx) * 2 );
+            else{
+                System.out.println("Entre else zona3 z");
+                aclx = 0;
+                velx = 0;
+                posx = 5556;
+            }
+            if(posy >= 15000)
+                acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
+            else{
+                System.out.println("Entre else zona31 y");
+                acly = 0;
+                vely = 0;
+                posy = 15000;
+            }
+        }
+        
+        if(zona == 4){
+            if(posx <= 9500)
+                aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(9500 -posx) * 2 );
+            else{
+                System.out.println("Entre else zona 4 x");
+                aclx = 0;
+                velx = 0;
+                posx = 5556;
+            }
+            if(posy <= 15000)
+                acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(15000-posy) * 2 );
+            else{
+                System.out.println("Entre else zona4 y");
+                acly = 0;
+                vely = 0;
+                posy = 15000;
+            }
+        }
+        
+        if(zona == 5){
+            if(posx <= 15000)
+                aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
+            else{
+                System.out.println("Entre else zona5 x");
+                aclx = 0;
+                velx = 0;
+                //posx = 15000;
+            }
+            if(posy <= 9500)
+            acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(9500-posy) * 2 );
+            else{
+                System.out.println("Entre else zona5 y");
+                acly = 0;
+                vely = 0;
+                posy = 5556;
+            }
+        }
+        
+        if(zona == 6){
+            if(posx >= 15000)
+                aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
+            else{
+                System.out.println("Entre else zona6 x");
+                aclx = 0;
+                velx = 0;
+                posx = 15000;
+            }
+            if(posy <= 9500)
+                acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(9500-posy) * 2 );
+            else{
+                System.out.println("Entre else zona6 y");
+                acly = 0;
+                vely = 0;
+                posy = 5556;
+            }
+        }
+
+        if(zona == 7){
+            if(posx <= 15000)
+                aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
+            else{
+                System.out.println("Entre else zona7 x");
+                aclx = 0;
+                velx = 0;
+                posx = 15000;
+            }
+            if(posy >= 20500)
+                acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(20500-posy) * 2 );
+            else{
+                System.out.println("Entre else zona7 y");
+                acly = 0;
+                vely = 0;
+                posy = 20556;
+            }
+        }
+        
+        if(zona == 8 ){
+            if(posx >= 15000)
+                aclx = (float) (Math.pow(velfx, 2) - Math.pow(velx, 2) )/ ( Math.abs(15000-posx) * 2 );
+            else{
+                System.out.println("Entre else zona8 x ");
+                aclx = 0;
+                velx = 0;
+                posx = 15000;
+            }
+            if(posy >=20500)
+                acly = (float) (Math.pow(velfy, 2) - Math.pow(vely, 2) )/ ( Math.abs(20500-posy) * 2 );
+            else{
+                System.out.println("Entre else zona8 y");
+                acly = 0;
+                vely = 0;
+                posy = 20556;
+            }
+        }
+        
+        //aclx = aclx * -1;
+        //acly = acly * -1;
+        
     }
     
     public void detener(){

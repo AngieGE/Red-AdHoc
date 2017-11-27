@@ -114,6 +114,8 @@ public class ControlTorre extends JPanel{
                         
                         aviones.get(ind).zona = nAvion.zona;
                         
+                        
+                        
                         aviones.get(ind).CalcularAceleracion(x[aviones.get(ind).pista],y[aviones.get(ind).pista] ,  velx[aviones.get(ind).pista], vely[aviones.get(ind).pista]);
                         
                         System.out.println( "Su aceleracion va a ser X:  " + aviones.get(ind).aclx  );
