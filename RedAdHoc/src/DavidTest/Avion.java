@@ -5,6 +5,7 @@
  */
 package DavidTest;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author gaona
  */
-public class Avion extends Thread{
+public class Avion extends Thread implements Serializable{
     
     String ip;
     
@@ -47,54 +48,75 @@ public class Avion extends Thread{
         switch(zona){
             case 1:
                 posx = (float) (Math.random() * 1000)   + 14500;
-                posy = (float) (Math.random() * 15000)  + 0;
-                posz = (float) (Math.random() * 3000)   + 10000;
+                posy = (float) (Math.random() * 15000)  - 15000;
+                posz = (float) (Math.random() * 2000)   + 5000;
+                velx = (float) (Math.random() * 22) - 122;
+                vely = (float) (Math.random() * 22) + 100;
+                velz = 0;
                 break;
             case 2:
                 posx = (float) (Math.random() * 1000)   + 14500;
                 posy = (float) (Math.random() * 15000)  - 15000;
-                posz = (float) (Math.random() * 3000)   + 10000;
+                posz = (float) (Math.random() * 2000)   + 5000;
+                velx = (float) (Math.random() * 22) - 122;
+                vely = (float) (Math.random() * 22) - 122;
+                velz = 0;
                 break;
             case 3:
                 posx = (float) (Math.random() * 1000)   - 15500;
-                posy = (float) (Math.random() * 15500)  + 0;
-                posz = (float) (Math.random() * 3000)   + 10000;
+                posy = (float) (Math.random() * 15500)  - 15500;
+                posz = (float) (Math.random() * 2000)   + 5000;
+                velx = (float) (Math.random() * 22) + 100;
+                vely = (float) (Math.random() * 22) + 100;
+                velz = 0;
                 break;
             case 4:
-                posx = (float) (Math.random() * 15000)  - 15500;
-                posy = (float) (Math.random() * 1000)   - 14000;
-                posz = (float) (Math.random() * 3000)   + 10000;
+                posx = (float) (Math.random() * 1000)  - 15500;
+                posy = (float) (Math.random() * 15500)  - 0;
+                posz = (float) (Math.random() * 2000)   + 5000; 
+                velx = (float) (Math.random() * 22) + 100;
+                vely = (float) (Math.random() * 22) - 122;
+                velz = 0;
                 break;
             case 5:
-                posx = (float) (Math.random() * 15500)   - 15500;
+                posx = (float) (Math.random() * 15500)  - 15500;
                 posy = (float) (Math.random() * 1000)   + 14500;
-                posz = (float) (Math.random() * 3000)   + 10000;
+                posz = (float) (Math.random() * 2000)   + 5000;
+                velx = (float) (Math.random() * 22) + 100;
+                vely = (float) (Math.random() * 22) - 122;
+                velz = 0;
                 break;
             case 6:
-                posx = (float) (Math.random() * 15500)   - 0;
+                posx = (float) (Math.random() * 15500)  - 0;
                 posy = (float) (Math.random() * 1000)   + 14500;
-                posz = (float) (Math.random() * 3000)   + 10000;
+                posz = (float) (Math.random() * 2000)   + 5000;
+                velx = (float) (Math.random() * 22) - 122;
+                vely = (float) (Math.random() * 22) - 122;
+                velz = 0;
                 break;
             case 7:
-                posx = (float) (Math.random() * 15500)   - 15500;
+                posx = (float) (Math.random() * 15500)  - 15500;
                 posy = (float) (Math.random() * 1000)   - 15500;
-                posz = (float) (Math.random() * 3000)   + 10000;
+                posz = (float) (Math.random() * 2000)   + 5000;
+                velx = (float) (Math.random() * 22) + 100;
+                vely = (float) (Math.random() * 22) + 100;
+                velz = 0;
                 break;
             case 8:
-                posx = (float) (Math.random() * 15500)   - 0;
+                posx = (float) (Math.random() * 15500)  - 0;
                 posy = (float) (Math.random() * 1000)   + 14500;
-                posz = (float) (Math.random() * 3000)   + 10000;
+                posz = (float) (Math.random() * 2000)   + 5000;
+                velx = (float) (Math.random() * 22) - 122;
+                vely = (float) (Math.random() * 22) + 100;
+                velz = 0;
                 break;
         }
-        
-        velx = (float) (Math.random() * 22) + 100;
-        vely = (float) (Math.random() * 22) + 100;
-        velz = 0;
-        
         
         aclx = 0;
         acly = 0;
         aclx = 0;
+        
+        ip = "Soy el avion numero 1";
         
         control = true;
     }
@@ -180,9 +202,10 @@ public class Avion extends Thread{
             posz = posz + (velz * 1) + ((aclz * 1)/2);
 
             //se calcula la nueva velocida
-            velx = velx + (aclx * 10);
-            vely = vely + (acly * 10);
-            velz = velz + (aclz * 10);
+            velx = velx + (aclx * 1);
+            vely = vely + (acly * 1);
+            velz = velz + (aclz * 1);
+            
             
             try {
                 Thread.sleep(1000);
@@ -191,6 +214,8 @@ public class Avion extends Thread{
             }
         }
     }
+    
+    
     
     public void detener(){
         control = false;

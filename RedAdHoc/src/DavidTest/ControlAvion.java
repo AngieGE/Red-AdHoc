@@ -14,24 +14,76 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import java.awt.Dimension;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;import java.net.UnknownHostException;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 /**
  *
  * @author gaona
  */
 public class ControlAvion extends JPanel{
     static Avion miAvion;
+    static sender emisor;
+    static int port;
     
     public static void main(String args[]){
-        
-        miAvion = new Avion();
+        port = 12345;
+
+        miAvion = new Avion(){};
         //System.out.println("X: " + miAvion.posx + " Y: " + miAvion.posy + " Z: " + miAvion.posz);
         
         miAvion.start();
-        
-        
-        
         //miAvion.detener();
         
+        emisor= new sender(){
+            @Override
+            public void run(){
+                int port = 12345;
+                while(control){
+                    try {
+                        DatagramSocket socket = new DatagramSocket();
+                        InetAddress server = InetAddress.getByName("192.168.137.1");
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        ObjectOutputStream oos = new ObjectOutputStream(outputStream);
+                        miAvion.setIp(server.getHostAddress());
+                        oos.writeObject(miAvion);
+                        byte[] data = outputStream.toByteArray();
+                        DatagramPacket sendPacket = new DatagramPacket(data,data.length,server,port);
+                        socket.send(sendPacket);
+                        System.out.println("Message sent from client" );
+                        oos.close();
+                        outputStream.close();
+                        socket.close();
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(ControlAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ControlAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(ControlAvion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        };
+        
+        emisor.start();
+            
         // Creacion y visualizacion de la ventana
         JFrame v = new JFrame();
         ControlAvion panel = new ControlAvion();
@@ -64,14 +116,19 @@ public class ControlAvion extends JPanel{
     public void paint(Graphics g){
         super.paint(g);
         g.drawString( Float.toString(miAvion.posx), 20, 20);
+        g.drawRect(100, 100, 150, 150);
     }
     
     public Dimension getPreferredSize()
     {
-        return new Dimension(500, 500);
+        return new Dimension(600, 600);
     }
     
-    public class envioS extends Thread{
-        
+    public static class sender extends Thread{
+        boolean control = true;
+        public void detener(){
+            control = false;
+        }
     }
+
 }
