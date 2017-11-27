@@ -77,7 +77,8 @@ public class ControlAvion extends JPanel{
                         miAvion.velx = ninfo.velx;
                         miAvion.vely = ninfo.vely;
                         
-                        
+                        miAvion.posx = ninfo.posx;
+                        miAvion.posy = ninfo.posy;
                         
                         oos.close();
                         outputStream.close();

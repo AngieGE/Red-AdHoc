@@ -44,7 +44,7 @@ public class ControlTorre extends JPanel{
         int Port = 12345;
         //Pista 1
         x[0]    =  9500;
-        y[0]    =  115000;
+        y[0]    =  15000;
         velx[0] =  76;
         vely[0] =  0;
         //Pista 2
@@ -111,6 +111,8 @@ public class ControlTorre extends JPanel{
                         
                         aviones.get(ind).velx = nAvion.velx;
                         aviones.get(ind).vely = nAvion.vely;
+                        
+                        aviones.get(ind).zona = nAvion.zona;
                         
                         aviones.get(ind).CalcularAceleracion(x[aviones.get(ind).pista],y[aviones.get(ind).pista] ,  velx[aviones.get(ind).pista], vely[aviones.get(ind).pista]);
                         
