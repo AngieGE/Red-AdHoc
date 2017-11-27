@@ -97,6 +97,7 @@ public class ControlAvion extends JPanel{
                         Logger.getLogger(ControlAvion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+                
             }
         };
         
